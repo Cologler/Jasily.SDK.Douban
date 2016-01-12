@@ -1,0 +1,6 @@
+[submodule "Jasily.Api"]
+	path = Jasily.Api
+	url = https://github.com/Cologler/Jasily.Api.git
+[submodule "Jasily"]
+	path = Jasily
+	url = https://github.com/Cologler/jasily.cologler.git
