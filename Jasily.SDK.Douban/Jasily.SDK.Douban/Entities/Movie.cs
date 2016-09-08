@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Jasily.SDK.Douban.Entities
@@ -32,5 +32,22 @@ namespace Jasily.SDK.Douban.Entities
 
         [DataMember(Name = "current_season")]
         public string CurrentSeason { get; set; }
+
+        public override IEnumerable<string> AllNames()
+        {
+            if (!string.IsNullOrWhiteSpace(this.Title))
+                yield return this.Title;
+
+            if (!string.IsNullOrWhiteSpace(this.OriginalTitle))
+                yield return this.OriginalTitle;
+
+            foreach (var originName in base.AllNames())
+            {
+                if (originName.EndsWith("(港)") || originName.EndsWith("(台)"))
+                    yield return originName.Substring(0, originName.Length - 3);
+                else
+                    yield return originName;
+            }
+        }
     }
 }
